@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figure A-1: Site Location Map — REL749328</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; }
+        .header { background: #1a1a2e; color: white; padding: 15px 20px; text-align: center; }
+        .header h1 { font-size: 18px; margin-bottom: 5px; }
+        .header p { font-size: 12px; color: #aaa; }
+        #map { height: calc(100vh - 140px); width: 100%; }
+        .footer { background: #f5f5f5; padding: 10px 20px; font-size: 11px; color: #666; display: flex; justify-content: space-between; border-top: 1px solid #ddd; }
+        .legend { position: absolute; bottom: 80px; right: 10px; background: white; padding: 10px 15px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 1000; font-size: 12px; }
+        .legend h4 { margin-bottom: 8px; font-size: 13px; }
+        .legend-item { display: flex; align-items: center; margin: 5px 0; }
+        .legend-marker { width: 14px; height: 14px; border-radius: 50%; margin-right: 8px; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .pakington { background: #D62828; }
+        .roebuck { background: #003049; }
+        .info-panel { position: absolute; top: 80px; left: 10px; background: white; padding: 12px 15px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 1000; font-size: 11px; max-width: 280px; }
+        .info-panel h4 { margin-bottom: 8px; color: #333; }
+        .info-panel table { width: 100%; border-collapse: collapse; }
+        .info-panel td { padding: 3px 5px; }
+        .info-panel .label { color: #666; }
+        .info-panel .value { font-weight: bold; text-align: right; }
+        .leaflet-popup-content { font-size: 12px; }
+        .popup-title { font-weight: bold; margin-bottom: 5px; }
+        .popup-coords { font-family: monospace; font-size: 11px; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Figure A-1: Site Location Map — Wastewater Overflow Sites</h1>
+        <p>Buller / Kawatiri River, Westport | Field Survey: 14 December 2025 | REL749328</p>
+    </div>
+    <div id="map"></div>
+    <div class="legend">
+        <h4>Photo Locations</h4>
+        <div class="legend-item"><div class="legend-marker pakington"></div><span>Pakington PS (23 photos)</span></div>
+        <div class="legend-item"><div class="legend-marker roebuck"></div><span>Roebuck PS (7 photos)</span></div>
+    </div>
+    <div class="info-panel">
+        <h4>Survey Summary</h4>
+        <table>
+            <tr><td class="label">Survey Date:</td><td class="value">14 Dec 2025</td></tr>
+            <tr><td class="label">Total Photos:</td><td class="value">30</td></tr>
+            <tr><td class="label">Datum:</td><td class="value">WGS84</td></tr>
+            <tr><td class="label">Aerial Source:</td><td class="value">LINZ Buller 0.075m<br>Urban (2024-2025)</td></tr>
+        </table>
+    </div>
+    <div class="footer">
+        <span>Basemap: LINZ Buller 0.075m Urban Aerial Photos (2024-2025) | CC BY 4.0 LINZ</span>
+        <span>Robertson Environmental Ltd | January 2026</span>
+    </div>
+    <script>
+        const map = L.map('map').setView([-41.761, 171.597], 16);
+        L.tileLayer('https://basemaps.linz.govt.nz/v1/tiles/aerial/EPSG:3857/{z}/{x}/{y}.webp?api=c01hxa7wrqtfc18m5v0dwx11srv', {
+            maxZoom: 20,
+            attribution: '© <a href="https://www.linz.govt.nz/">LINZ</a> CC BY 4.0'
+        }).addTo(map);
+        const photoLocations = [
+            {id:'237',lat:-41.757119,lon:171.596803,site:'Pakington PS'},
+            {id:'238',lat:-41.757139,lon:171.596789,site:'Pakington PS'},
+            {id:'239',lat:-41.757222,lon:171.596783,site:'Pakington PS'},
+            {id:'240',lat:-41.758397,lon:171.597756,site:'Pakington PS'},
+            {id:'242',lat:-41.755403,lon:171.596931,site:'Pakington PS'},
+            {id:'243',lat:-41.757211,lon:171.596819,site:'Pakington PS'},
+            {id:'244',lat:-41.757244,lon:171.596772,site:'Pakington PS'},
+            {id:'245',lat:-41.757269,lon:171.596717,site:'Pakington PS'},
+            {id:'246',lat:-41.757244,lon:171.596669,site:'Pakington PS'},
+            {id:'247',lat:-41.756886,lon:171.597139,site:'Pakington PS'},
+            {id:'248',lat:-41.755544,lon:171.596964,site:'Pakington PS'},
+            {id:'249',lat:-41.755631,lon:171.597019,site:'Pakington PS'},
+            {id:'250',lat:-41.755475,lon:171.597106,site:'Pakington PS'},
+            {id:'251',lat:-41.757283,lon:171.596253,site:'Pakington PS'},
+            {id:'252',lat:-41.757128,lon:171.596539,site:'Pakington PS'},
+            {id:'253',lat:-41.757356,lon:171.596503,site:'Pakington PS'},
+            {id:'254',lat:-41.757503,lon:171.596358,site:'Pakington PS'},
+            {id:'255',lat:-41.757917,lon:171.596108,site:'Pakington PS'},
+            {id:'256',lat:-41.755783,lon:171.596994,site:'Pakington PS'},
+            {id:'257',lat:-41.758644,lon:171.595869,site:'Pakington PS'},
+            {id:'258',lat:-41.758822,lon:171.595825,site:'Pakington PS'},
+            {id:'259',lat:-41.755581,lon:171.597,site:'Pakington PS'},
+            {id:'260',lat:-41.759625,lon:171.595528,site:'Pakington PS'},
+            {id:'261',lat:-41.765786,lon:171.597367,site:'Roebuck PS'},
+            {id:'262',lat:-41.765744,lon:171.597314,site:'Roebuck PS'},
+            {id:'263',lat:-41.765747,lon:171.5973,site:'Roebuck PS'},
+            {id:'264',lat:-41.765758,lon:171.597303,site:'Roebuck PS'},
+            {id:'265',lat:-41.765992,lon:171.597244,site:'Roebuck PS'},
+            {id:'266',lat:-41.765706,lon:171.597208,site:'Roebuck PS'},
+            {id:'267',lat:-41.765622,lon:171.597194,site:'Roebuck PS'}
+        ];
+        photoLocations.forEach(photo => {
+            const color = photo.site === 'Pakington PS' ? '#D62828' : '#003049';
+            const marker = L.circleMarker([photo.lat, photo.lon], {
+                radius: 8, fillColor: color, color: '#fff', weight: 2, opacity: 1, fillOpacity: 0.9
+            }).addTo(map);
+            marker.bindPopup('<div class="popup-title">Photo IMG_0' + photo.id + '</div><div><strong>Site:</strong> ' + photo.site + '</div><div class="popup-coords">Lat: ' + photo.lat.toFixed(6) + '°<br>Lon: ' + photo.lon.toFixed(6) + '°</div>');
+            const label = L.divIcon({
+                className: 'photo-label',
+                html: '<div style="background:rgba(0,0,0,0.7);color:white;padding:2px 4px;border-radius:3px;font-size:9px;font-weight:bold;white-space:nowrap;">' + photo.id + '</div>',
+                iconSize: [30, 15], iconAnchor: [-5, 8]
+            });
+            L.marker([photo.lat, photo.lon], {icon: label}).addTo(map);
+        });
+        L.marker([-41.757, 171.594], {
+            icon: L.divIcon({className:'site-label',html:'<div style="background:white;border:2px solid #D62828;color:#D62828;padding:5px 10px;border-radius:4px;font-weight:bold;font-size:11px;white-space:nowrap;">PAKINGTON PS<br>OVERFLOW</div>',iconSize:[100,40],iconAnchor:[50,20]})
+        }).addTo(map);
+        L.marker([-41.766, 171.595], {
+            icon: L.divIcon({className:'site-label',html:'<div style="background:white;border:2px solid #003049;color:#003049;padding:5px 10px;border-radius:4px;font-weight:bold;font-size:11px;white-space:nowrap;">ROEBUCK PS<br>OVERFLOW</div>',iconSize:[100,40],iconAnchor:[50,20]})
+        }).addTo(map);
+        L.control.scale({imperial: false, position: 'bottomleft'}).addTo(map);
+    </script>
+</body>
+</html>
