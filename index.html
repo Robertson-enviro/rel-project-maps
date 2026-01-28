@@ -47,8 +47,12 @@
         <table>
             <tr><td class="label">Survey Date:</td><td class="value">14 Dec 2025</td></tr>
             <tr><td class="label">Total Photos:</td><td class="value">30</td></tr>
-            <tr><td class="label">Datum:</td><td class="value">WGS84</td></tr>
+            <tr><td class="label">Datum:</td><td class="value">WGS84 / NZTM</td></tr>
             <tr><td class="label">Aerial Source:</td><td class="value">LINZ Buller 0.075m<br>Urban (2024-2025)</td></tr>
+        </table>
+        <h4 style="margin-top: 10px;">Site Coordinates (NZTM)</h4>
+        <table>
+            <tr><td class="label">Pakington PS:</td><td class="value">1483289 E<br>5376957 N</td></tr>
         </table>
     </div>
     <div class="footer">
@@ -58,8 +62,7 @@
     <script>
         const map = L.map('map').setView([-41.761, 171.597], 16);
         L.tileLayer('https://basemaps.linz.govt.nz/v1/tiles/aerial/EPSG:3857/{z}/{x}/{y}.webp?api=c01hxa7wrqtfc18m5v0dwx11srv', {
-            maxZoom: 20,
-            attribution: '© <a href="https://www.linz.govt.nz/">LINZ</a> CC BY 4.0'
+            maxZoom: 20, attribution: '© LINZ CC BY 4.0'
         }).addTo(map);
         const photoLocations = [
             {id:'237',lat:-41.757119,lon:171.596803,site:'Pakington PS'},
@@ -107,7 +110,7 @@
             L.marker([photo.lat, photo.lon], {icon: label}).addTo(map);
         });
         L.marker([-41.757, 171.594], {
-            icon: L.divIcon({className:'site-label',html:'<div style="background:white;border:2px solid #D62828;color:#D62828;padding:5px 10px;border-radius:4px;font-weight:bold;font-size:11px;white-space:nowrap;">PAKINGTON PS<br>OVERFLOW</div>',iconSize:[100,40],iconAnchor:[50,20]})
+            icon: L.divIcon({className:'site-label',html:'<div style="background:white;border:2px solid #D62828;color:#D62828;padding:5px 10px;border-radius:4px;font-weight:bold;font-size:11px;white-space:nowrap;">PAKINGTON PS OVERFLOW<br><span style="font-size:9px;font-weight:normal;">NZTM: 1483289 E, 5376957 N</span></div>',iconSize:[140,45],iconAnchor:[70,22]})
         }).addTo(map);
         L.marker([-41.766, 171.595], {
             icon: L.divIcon({className:'site-label',html:'<div style="background:white;border:2px solid #003049;color:#003049;padding:5px 10px;border-radius:4px;font-weight:bold;font-size:11px;white-space:nowrap;">ROEBUCK PS<br>OVERFLOW</div>',iconSize:[100,40],iconAnchor:[50,20]})
